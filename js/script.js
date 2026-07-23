@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
       toggle.setAttribute('aria-expanded', expanded);
     });
 
-    // Fecha o menu ao clicar em um link (útil no celular)
     nav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         nav.classList.remove('open');
@@ -41,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.placeholder, .gallery figure img').forEach(function (el) {
       el.addEventListener('click', function () {
-        // Se já houver uma <img> real dentro, mostra ela ampliada.
         var img = el.tagName === 'IMG' ? el : el.querySelector('img');
         var label = el.getAttribute('data-label') || (img ? img.alt : '') || 'Obra';
 
