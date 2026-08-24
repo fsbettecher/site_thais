@@ -1,6 +1,6 @@
 // =========================================================
 // PORTFÓLIO DE ARTE — comportamento do site
-// Menu mobile, marcação do link ativo e lightbox das imagens
+// Menu mobile, header dinâmico, scroll reveal e lightbox
 // =========================================================
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -32,6 +32,44 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // ---------- Header encolhe ao rolar a página ----------
+  var header = document.querySelector('.site-header');
+  if (header) {
+    var onScroll = function () {
+      header.classList.toggle('scrolled', window.scrollY > 12);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // ---------- Scroll reveal (fade + slide suave ao entrar na tela) ----------
+  var revealSelectors = [
+    '.section-head', '.art-types > a', '.gallery figure',
+    '.about-grid > *', '.contact-grid > *', '.hero-index li',
+    '.subsection-title', '.page-hero .lede'
+  ];
+  var revealEls = document.querySelectorAll(revealSelectors.join(','));
+
+  revealEls.forEach(function (el, i) {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 6) * 70 + 'ms';
+  });
+
+  if ('IntersectionObserver' in window && revealEls.length) {
+    var observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(function (el) { observer.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in-view'); });
+  }
+
   // ---------- Lightbox simples para as imagens/placeholders ----------
   var lightbox = document.getElementById('lightbox');
   if (lightbox) {
@@ -56,10 +94,14 @@ document.addEventListener('DOMContentLoaded', function () {
         lightboxInner.appendChild(caption);
 
         lightbox.classList.add('open');
+        requestAnimationFrame(function () { lightbox.classList.add('show'); });
       });
     });
 
-    function closeLightbox() { lightbox.classList.remove('open'); }
+    function closeLightbox() {
+      lightbox.classList.remove('show');
+      setTimeout(function () { lightbox.classList.remove('open'); }, 200);
+    }
 
     closeBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', function (e) {
@@ -67,6 +109,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
+    });
+  }
+
+
+  // ---------- Filtro de categorias da galeria (Obras) ----------
+  var tabs = document.querySelectorAll('.filter-tabs button');
+  var figures = document.querySelectorAll('#obras .gallery figure');
+
+  if (tabs.length && figures.length) {
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+
+        var cat = tab.getAttribute('data-filter');
+        figures.forEach(function (fig) {
+          var figCat = fig.getAttribute('data-category');
+          var show = cat === 'todas' || cat === figCat;
+          fig.classList.toggle('hide', !show);
+        });
+      });
     });
   }
 
