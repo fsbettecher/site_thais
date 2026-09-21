@@ -1,60 +1,35 @@
 // =========================================================
-// PORTFÓLIO DE ARTE — Thais Ohnesorge
-// v2 — menu lateral expansível, carrossel, header, reveal, lightbox
+// PORTFÓLIO DE ARTE — comportamento do site
+// Menu mobile, header dinâmico, scroll reveal e lightbox
 // =========================================================
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ---------- Menu lateral (off-canvas) ----------
-  var menuToggle = document.querySelector('.menu-toggle');
-  var sidebar = document.querySelector('.sidebar');
-  var overlay = document.querySelector('.sidebar-overlay');
-  var sidebarClose = document.querySelector('.sidebar-close');
+  // ---------- Menu mobile (hambúrguer) ----------
+  var toggle = document.querySelector('.menu-toggle');
+  var nav = document.querySelector('.main-nav');
 
-  function openSidebar() {
-    sidebar.classList.add('open');
-    overlay.classList.add('open');
-    menuToggle.classList.add('open');
-    menuToggle.setAttribute('aria-expanded', 'true');
-    sidebar.setAttribute('aria-hidden', 'false');
-  }
-  function closeSidebar() {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('open');
-    menuToggle.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    sidebar.setAttribute('aria-hidden', 'true');
-  }
-  if (menuToggle && sidebar && overlay) {
-    menuToggle.addEventListener('click', function () {
-      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      nav.classList.toggle('open');
+      var expanded = nav.classList.contains('open');
+      toggle.setAttribute('aria-expanded', expanded);
     });
-    overlay.addEventListener('click', closeSidebar);
-    if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeSidebar();
-    });
-    // fecha ao clicar em um link de destino (não no botão que abre submenu)
-    sidebar.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', closeSidebar);
-    });
-  }
 
-  // ---------- Submenu "Coleções" (acordeão) ----------
-  document.querySelectorAll('.submenu-toggle').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var submenu = document.getElementById(btn.getAttribute('aria-controls'));
-      var expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      if (submenu) submenu.classList.toggle('open', !expanded);
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        nav.classList.remove('open');
+      });
     });
-  });
+  }
 
   // ---------- Marca o link ativo no menu conforme a página atual ----------
   var currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.sidebar-nav a').forEach(function (link) {
+  document.querySelectorAll('.main-nav a').forEach(function (link) {
     var href = link.getAttribute('href').split('#')[0];
-    if (href === currentPage) link.classList.add('active');
+    if (href === currentPage || (href === '' && currentPage === 'index.html')) {
+      link.classList.add('active');
+    }
   });
 
   // ---------- Header encolhe ao rolar a página ----------
@@ -67,69 +42,19 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // ---------- Carrossel ----------
-  var carousel = document.querySelector('.carousel');
-  if (carousel) {
-    var track = carousel.querySelector('.carousel-track');
-    var slides = carousel.querySelectorAll('.carousel-slide');
-    var dots = carousel.querySelectorAll('.carousel-dot');
-    var toggleBtn = carousel.querySelector('.carousel-toggle');
-    var prevBtn = carousel.querySelector('.carousel-arrow.prev');
-    var nextBtn = carousel.querySelector('.carousel-arrow.next');
-    var iconPause = toggleBtn ? toggleBtn.querySelector('.icon-pause') : null;
-    var iconPlay = toggleBtn ? toggleBtn.querySelector('.icon-play') : null;
-
-    var current = 0;
-    var total = slides.length;
-    var playing = true;
-    var timer = null;
-
-    function goTo(index) {
-      current = (index + total) % total;
-      track.style.transform = 'translateX(-' + (current * 100) + '%)';
-      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
-    }
-    function next() { goTo(current + 1); }
-    function prev() { goTo(current - 1); }
-
-    function startAutoplay() {
-      stopAutoplay();
-      timer = setInterval(next, 5000);
-    }
-    function stopAutoplay() {
-      if (timer) clearInterval(timer);
-      timer = null;
-    }
-
-    function setPlaying(state) {
-      playing = state;
-      if (playing) { startAutoplay(); } else { stopAutoplay(); }
-      if (iconPause) iconPause.style.display = playing ? 'block' : 'none';
-      if (iconPlay) iconPlay.style.display = playing ? 'none' : 'block';
-      if (toggleBtn) toggleBtn.setAttribute('aria-label', playing ? 'Pausar carrossel' : 'Reproduzir carrossel');
-    }
-
-    dots.forEach(function (dot, i) {
-      dot.addEventListener('click', function () { goTo(i); if (playing) startAutoplay(); });
-    });
-    if (nextBtn) nextBtn.addEventListener('click', function () { next(); if (playing) startAutoplay(); });
-    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); if (playing) startAutoplay(); });
-    if (toggleBtn) toggleBtn.addEventListener('click', function () { setPlaying(!playing); });
-
-    goTo(0);
-    setPlaying(true);
-  }
-
-  // ---------- Scroll reveal ----------
+  // ---------- Scroll reveal (fade + slide suave ao entrar na tela) ----------
   var revealSelectors = [
-    '.section-head', '.stack-card', '.gallery figure',
-    '.about-grid > *', '.contact-grid > *', '.page-hero .lede'
+    '.section-head', '.art-types > a', '.gallery figure',
+    '.about-grid > *', '.contact-grid > *', '.hero-index li',
+    '.subsection-title', '.page-hero .lede'
   ];
   var revealEls = document.querySelectorAll(revealSelectors.join(','));
+
   revealEls.forEach(function (el, i) {
     el.classList.add('reveal');
     el.style.transitionDelay = (i % 6) * 70 + 'ms';
   });
+
   if ('IntersectionObserver' in window && revealEls.length) {
     var observer = new IntersectionObserver(function (entries, obs) {
       entries.forEach(function (entry) {
@@ -139,12 +64,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
     revealEls.forEach(function (el) { observer.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  // ---------- Lightbox (páginas de coleção/categoria) ----------
+  // ---------- Lightbox simples para as imagens/placeholders ----------
   var lightbox = document.getElementById('lightbox');
   if (lightbox) {
     var lightboxInner = lightbox.querySelector('.lightbox-inner');
@@ -163,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
           lightboxInner.appendChild(big);
         }
         var caption = document.createElement('p');
+        caption.style.marginTop = '1rem';
         caption.textContent = label;
         lightboxInner.appendChild(caption);
 
@@ -175,9 +102,35 @@ document.addEventListener('DOMContentLoaded', function () {
       lightbox.classList.remove('show');
       setTimeout(function () { lightbox.classList.remove('open'); }, 200);
     }
-    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  }
+
+
+  // ---------- Filtro de categorias da galeria (Obras) ----------
+  var tabs = document.querySelectorAll('.filter-tabs button');
+  var figures = document.querySelectorAll('#obras .gallery figure');
+
+  if (tabs.length && figures.length) {
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+
+        var cat = tab.getAttribute('data-filter');
+        figures.forEach(function (fig) {
+          var figCat = fig.getAttribute('data-category');
+          var show = cat === 'todas' || cat === figCat;
+          fig.classList.toggle('hide', !show);
+        });
+      });
+    });
   }
 
 });

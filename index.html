@@ -3,233 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thais Ohnesorge Arte</title>
-<meta name="description" content="Portfólio de Thais Ohnesorge, ilustradora e aquarelista: aquarela, ilustração infantil, pintura ao vivo, pintura em parede e aulas.">
-<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<title>Thais Ohnesorge ARTE</title>
+<meta name="description" content="O site de Thais Ohnesorge, ilustradora e aquarelista, está em construção. Em breve novidades.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fffaf1;
+    --sand:#f1ceb6;
+    --green:#b4d75d;
+    --wine:#923737;
+    --red:#d24737;
+    --ink:#2b2420;
+    --ink-soft:#6b5f54;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100svh;
+    padding:2rem;
+    background:
+      radial-gradient(circle at 15% 20%, var(--sand) 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, var(--green) 0%, transparent 40%),
+      var(--paper);
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    text-align:center;
+  }
+  .card{
+    max-width:600px;
+    width:100%;
+  }
+  .brand-mark{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    margin:0 auto;
+  }
+  .brand-mark img{
+    width:200px;
+    width:clamp(150px, 30vw, 200px);
+    height:auto;
+    flex:0 0 auto;
+    margin-top:-6%;
+    filter:drop-shadow(0 6px 14px rgba(146,55,55,0.12));
+  }
+  .brand-mark .script-name{
+    font-family:'Beau Rivage', cursive;
+    color:var(--wine);
+    line-height:1;
+    white-space:nowrap;
+    flex:0 0 auto;
+    font-size:2.6rem;
+    font-size:clamp(1.9rem, 6vw, 2.6rem);
+  }
+  .brand-mark .name-left{
+    text-align:right;
+  }
+  .brand-mark .name-right{
+    text-align:left;
+  }
+  .status{
+    margin-top:1.8rem;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1.35rem;
+    color:var(--ink-soft);
+    letter-spacing:0.01em;
+  }
+  .lede{
+    margin-top:0.6rem;
+    font-size:0.98rem;
+    color:var(--ink-soft);
+  }
+  .rule{
+    width:64px;
+    height:2px;
+    background:var(--green);
+    border:none;
+    margin:1.6rem auto;
+  }
+  .social{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+  .social a{
+    color:var(--wine);
+    text-decoration:none;
+    border-bottom:1px solid var(--sand);
+  }
+  .social a:hover{
+    border-color:var(--wine);
+  }
+
+  @media (max-width: 480px){
+    .brand-mark{
+      flex-wrap:wrap;
+      row-gap:0.3rem;
+    }
+    .brand-mark img{
+      order:-1;
+      flex-basis:100%;
+      margin-top:0;
+      width:180px;
+    }
+    .brand-mark .script-name{
+      font-size:2rem;
+    }
+  }
+</style>
 </head>
 <body>
-
-<!-- ===================== HEADER ===================== -->
-<header class="site-header">
-  <div class="wrap">
-    <div class="header-left">
-      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <a href="index.html" class="brand">
-        <img src="assets/img/hummingbird.png" alt="Beija-flor, símbolo de Thais Ohnesorge Arte">
-        <span class="brand-text">
-          <span class="brand-name">Thais Ohnesorge</span>
-          <span class="brand-tag">Arte</span>
-        </span>
-      </a>
+  <div class="card">
+    <div class="brand-mark">
+      <span class="script-name name-left">Thais</span>
+      <img src="assets/img/hummingbird.png" alt="Beija-flor em aquarela, símbolo de Thais Ohnesorge Arte">
+      <span class="script-name name-right">Ohnesorge</span>
     </div>
-    <a href="index.html#contato" class="header-contact">Contato</a>
+
+    <p class="status">Site em construção</p>
+    <p class="lede">Em breve, novidades para você.</p>
+
+    <hr class="rule">
+
+    <p class="social">
+      <a href="https://instagram.com/tha.ohne" target="_blank" rel="noopener">@tha.ohne</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:ohnesorgethai@gmail.com">ohnesorgethai@gmail.com</a>
+    </p>
   </div>
-</header>
-
-<!-- ===================== MENU LATERAL ===================== -->
-<div class="sidebar-overlay"></div>
-<aside class="sidebar" aria-hidden="true">
-  <div class="sidebar-top">
-    <span class="brand-tag" style="color:var(--wine); font-size:1.3rem;">Menu</span>
-    <button class="sidebar-close" aria-label="Fechar menu">&times;</button>
-  </div>
-  <nav class="sidebar-nav">
-    <ul>
-      <li><a href="index.html">Página inicial</a></li>
-      <li>
-        <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls="submenu-colecoes">
-          Coleções
-          <span class="chevron" aria-hidden="true"></span>
-        </button>
-        <ul class="submenu" id="submenu-colecoes">
-            <li><a href="meu-valor.html">Meu valor</a></li>
-            <li><a href="colheita.html">Colheita</a></li>
-            <li><a href="aquieta-te.html">Aquieta-te</a></li>
-        </ul>
-      </li>
-        <li><a href="aquarela.html">Aquarela</a></li>
-        <li><a href="aulas.html">Aulas</a></li>
-        <li><a href="ilustracao-infantil.html">Ilustração Infantil</a></li>
-        <li><a href="pintura-ao-vivo.html">Pintura ao vivo</a></li>
-        <li><a href="pintura-em-parede.html">Pintura em parede</a></li>
-    </ul>
-  </nav>
-</aside>
-
-<!-- ===================== CARROSSEL ===================== -->
-<section class="carousel-section" style="padding:0;">
-  <div class="carousel">
-    <div class="carousel-track">
-
-      <div class="carousel-slide placeholder-slide" data-label="Imagem 1 — substitua pela foto real">
-        <span class="ph-label">Imagem 1 do carrossel — 1600 × 600 px</span>
-      </div>
-
-      <div class="carousel-slide placeholder-slide" data-label="Imagem 2 — substitua pela foto real">
-        <span class="ph-label">Imagem 2 do carrossel — 1600 × 600 px</span>
-      </div>
-
-      <div class="carousel-slide placeholder-slide" data-label="Imagem 3 — substitua pela foto real">
-        <span class="ph-label">Imagem 3 do carrossel — 1600 × 600 px</span>
-      </div>
-
-    </div>
-
-    <button class="carousel-arrow prev" aria-label="Slide anterior">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
-    </button>
-    <button class="carousel-arrow next" aria-label="Próximo slide">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-    </button>
-
-    <div class="carousel-controls">
-      <div class="carousel-dots">
-        <button class="carousel-dot active" aria-label="Ir para o slide 1"></button>
-        <button class="carousel-dot" aria-label="Ir para o slide 2"></button>
-        <button class="carousel-dot" aria-label="Ir para o slide 3"></button>
-      </div>
-      <button class="carousel-toggle" aria-label="Pausar carrossel">
-        <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-        <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== SOBRE ===================== -->
-<section id="sobre">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Sobre a artista</p>
-      <h2>Thais Ohnesorge</h2>
-    </div>
-
-    <div class="about-grid">
-      <div class="about-photo">
-        <img src="assets/img/artista.webp" alt="Thais Ohnesorge em seu ateliê">
-      </div>
-
-      <div class="about-text">
-        <h3>Um pouco da minha história</h3>
-        <p>Pinto aquarelas inspiradas nas pequenas transformações da natureza — cada estação um registro, cada obra um memorial para guardar. Substitua este parágrafo pela sua história real: como começou, sua formação, as técnicas que mais usa e o que te motiva a criar.</p>
-        <p>Pode citar exposições, cursos, prêmios ou projetos marcantes, se fizer sentido. Se preferir algo mais simples, um parágrafo curto também funciona muito bem.</p>
-      </div>
-
-      <div class="philosophy-block">
-        <blockquote>Acredito que a arte é uma conversa entre a mão e o meio.</blockquote>
-        <p>Meu processo é lento, deliberado, e frequentemente ditado pelo modo como a água se move sobre a fibra do papel. Cada série é um registro das estações: as cores mudam com o tempo, e o papel guarda a memória de cada camada de água.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== COLEÇÕES ===================== -->
-<section class="alt" id="colecoes">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Séries autorais</p>
-      <h2>Coleções</h2>
-    </div>
-
-    <div class="stack-list">
-
-      <a href="meu-valor.html" class="stack-card placeholder-card" data-label="Foto da coleção — substitua pela imagem">
-        <span class="ph-label">Meu valor — foto em breve</span>
-        <div class="stack-overlay"><span>Meu valor</span></div>
-      </a>
-
-
-      <a href="colheita.html" class="stack-card placeholder-card" data-label="Foto da coleção — substitua pela imagem">
-        <span class="ph-label">Colheita — foto em breve</span>
-        <div class="stack-overlay"><span>Colheita</span></div>
-      </a>
-
-
-      <a href="aquieta-te.html" class="stack-card placeholder-card" data-label="Foto da coleção — substitua pela imagem">
-        <span class="ph-label">Aquieta-te — foto em breve</span>
-        <div class="stack-overlay"><span>Aquieta-te</span></div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===================== PORTFÓLIO ===================== -->
-<section id="portfolio">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Trabalhos por técnica</p>
-      <h2>Portfólio</h2>
-    </div>
-
-    <div class="stack-list">
-
-      <a href="aquarela.html" class="stack-card placeholder-card" data-label="Foto da categoria — substitua pela imagem">
-        <span class="ph-label">Aquarela — foto em breve</span>
-        <div class="stack-overlay"><span>Aquarela</span></div>
-      </a>
-
-
-      <a href="aulas.html" class="stack-card placeholder-card" data-label="Foto da categoria — substitua pela imagem">
-        <span class="ph-label">Aulas — foto em breve</span>
-        <div class="stack-overlay"><span>Aulas</span></div>
-      </a>
-
-
-      <a href="ilustracao-infantil.html" class="stack-card placeholder-card" data-label="Foto da categoria — substitua pela imagem">
-        <span class="ph-label">Ilustração Infantil — foto em breve</span>
-        <div class="stack-overlay"><span>Ilustração Infantil</span></div>
-      </a>
-
-
-      <a href="pintura-ao-vivo.html" class="stack-card placeholder-card" data-label="Foto da categoria — substitua pela imagem">
-        <span class="ph-label">Pintura ao vivo — foto em breve</span>
-        <div class="stack-overlay"><span>Pintura ao vivo</span></div>
-      </a>
-
-
-      <a href="pintura-em-parede.html" class="stack-card placeholder-card" data-label="Foto da categoria — substitua pela imagem">
-        <span class="ph-label">Pintura em parede — foto em breve</span>
-        <div class="stack-overlay"><span>Pintura em parede</span></div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===================== CONTATO ===================== -->
-<section class="alt" id="contato">
-  <div class="wrap contact-grid">
-    <p class="eyebrow">Contato</p>
-    <h2>Vamos conversar</h2>
-    <p>Está interessado em uma encomenda, parceria ou só quer trocar uma ideia sobre arte? Me chame por um dos canais abaixo.</p>
-    <div class="contact-links">
-      <a href="https://instagram.com/tha.ohne" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:ohnesorgethai@gmail.com">E-mail</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== RODAPÉ ===================== -->
-<footer class="site-footer">
-  <div class="wrap">
-    <span>© 2026 Thais Ohnesorge. Todos os direitos reservados.</span>
-    <span><a href="https://instagram.com/tha.ohne" target="_blank" rel="noopener">@tha.ohne</a> · thaohne.com.br</span>
-  </div>
-</footer>
-
-<!-- ===================== LIGHTBOX ===================== -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" aria-label="Fechar">&times;</button>
-  <div class="lightbox-inner"></div>
-</div>
-
-<script src="js/script.js"></script>
 </body>
 </html>
